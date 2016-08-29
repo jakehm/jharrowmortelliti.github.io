@@ -1,7 +1,44 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script>
+function idleLogout() {
+
+    //set to 4 mintues
+    var timer = 1000*60*4;
+
+    var t;
+    var blink;
+    
+    window.onload = resetTimer;
+    window.onmousemove = resetTimer;
+    window.onmousedown = resetTimer; // catches touchscreen presses
+    window.onclick = resetTimer;     // catches touchpad clicks
+    window.onscroll = resetTimer;    // catches scrolling with arrow keys
+    window.onkeypress = resetTimer;
+
+    function logout() {
+			var color = 'white';
+			blink = setInterval(function(){
+				if (color=='red') color = 'white';
+				else color='red';
+				document.body.style.background = color;
+			},200);
+    }
+
+    function resetTimer() {
+        clearTimeout(t);
+        clearInterval(blink);
+        setTimeout(function() {
+			document.body.style.background = 'white';
+		}, 1000);
+        t = setTimeout(logout, timer);  // time is in milliseconds
+    }
+}
+idleLogout();
+        </script>
+    </head>
+	<body>
+	</body>
 </html>
