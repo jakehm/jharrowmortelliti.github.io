@@ -2,12 +2,48 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <script>
+    	<style>
+    	div {
+    		  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+    	</style>
+    </head>
+<body>
+    <div>Alert in <font size="20"><span id="time">04:00</span></font> minutes!</div>
+
+<script>
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    countdownTimer = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+		duration--;
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+    var fourMinutes = 60 * 4,
+    	display = document.querySelector('#time');
+    startTimer(fourMinutes, display);
+
+
+
 function idleLogout() {
-
+	
     //set to 4 mintues
-    var timer = 1000*60*4;
-
+    var alertTime = 1000*60*4;
     var t;
     var blink;
     
@@ -32,13 +68,15 @@ function idleLogout() {
         clearInterval(blink);
         setTimeout(function() {
 			document.body.style.background = 'white';
-		}, 1000);
-        t = setTimeout(logout, timer);  // time is in milliseconds
+		}, 500);
+        t = setTimeout(logout, alertTime);  // time is in milliseconds
+        clearInterval(countdownTimer);
+        startTimer(fourMinutes, display);
     }
 }
 idleLogout();
+
         </script>
-    </head>
-	<body>
-	</body>
+
+</body>
 </html>
