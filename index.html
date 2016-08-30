@@ -34,16 +34,16 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-    var fourteenMinutes = 60 * 14,
+    var idleTimer = 60 * 14,
     	display = document.querySelector('#time');
-    startTimer(fourteenMinutes, display);
+    startTimer(idleTimer, display);
 
 
 
 function idleLogout() {
 	
     //set to 4 mintues
-    var alertTime = 1000*60*14;
+    var alertTime = idleTimer*1000;
     var t;
     var blink;
     
@@ -71,7 +71,7 @@ function idleLogout() {
 		}, 500);
         t = setTimeout(logout, alertTime);  // time is in milliseconds
         clearInterval(countdownTimer);
-        startTimer(fourteenMinutes, display);
+        startTimer(idleTimer, display);
     }
 }
 idleLogout();
